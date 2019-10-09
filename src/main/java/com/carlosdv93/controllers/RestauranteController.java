@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.carlosdv93.model.RestauranteModel;
+import com.carlosdv93.model.Restaurante;
 import com.carlosdv93.repositories.RestauranteRepository;
 
 
@@ -28,12 +28,12 @@ public class RestauranteController {
 	private RestauranteRepository repository;
 	
 	@GetMapping(path="")
-	public Iterable<RestauranteModel> getAll(){
+	public Iterable<Restaurante> getAll(){
 		return repository.findAll();
 	}
 	
 	@PostMapping
-	public ResponseEntity<RestauranteModel> insert(@Valid @RequestBody RestauranteModel restaurante){
+	public ResponseEntity<Restaurante> insert(@Valid @RequestBody Restaurante restaurante){
 		restaurante = repository.save(restaurante);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(restaurante).toUri();
@@ -42,21 +42,21 @@ public class RestauranteController {
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(path="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<RestauranteModel> atualizarPessoa(@PathVariable Long id, @RequestBody RestauranteModel restaurante){
-		Optional<RestauranteModel> restaurante1 = repository.findById(id);
+	public ResponseEntity<Restaurante> atualizarPessoa(@PathVariable Restaurante id, @RequestBody Restaurante restaurante){
+		Optional<Restaurante> restaurante1 = repository.findById(id);
 		if(restaurante1 != null) {
-			RestauranteModel restaurante2 = restaurante1.get();
+			Restaurante restaurante2 = restaurante1.get();
 			restaurante2.setNome(restaurante1.get().getNome());
 			restaurante2.setTipoComida(restaurante1.get().getTipoComida());
 			repository.save(restaurante2);
 			return ResponseEntity.ok(restaurante2);
 		} else {
-			return (ResponseEntity<RestauranteModel>) ResponseEntity.badRequest();
+			return (ResponseEntity<Restaurante>) ResponseEntity.badRequest();
 		}
 	}
 	
 	@RequestMapping(path="/{id}", method=RequestMethod.DELETE)
-	public ResponseEntity<Object> deletarPessoa(@PathVariable Long id){
+	public ResponseEntity<Object> deletarPessoa(@PathVariable Restaurante id){
 		repository.deleteById(id);
 		return ResponseEntity.ok(null);
 	}

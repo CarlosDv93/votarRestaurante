@@ -1,6 +1,7 @@
 package com.carlosdv93.model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -10,60 +11,66 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="voto")
-public class VotoRestaurante  implements Serializable {
+@Table(name = "voto")
+public class VotoRestaurante implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
-	
-	private RestauranteModel restauranteModel; 
-	private Date dataAtual;
-	
-	private Usuario usuario;
-	
+	private Restaurante id;
+
+	private Long idRestauranteVotado;
+	private int numeroVotos;
+	private LocalDate dataAtual;
+
+	private Long usuario;
+
 	public VotoRestaurante() {
-		
+
 	}
 
-	public VotoRestaurante(RestauranteModel restauranteModel, Date dataAtual, Usuario usuario) {
-		super();
-		this.restauranteModel = restauranteModel;
-		this.dataAtual = dataAtual;
+	//TODO: Mantendo inicialmente o valor do ID, posteriormente fazer o vínculo.
+	public VotoRestaurante(Long restauranteModel, LocalDate localDate, Long usuario) {
+		this.idRestauranteVotado = restauranteModel;
+		this.dataAtual = localDate;
 		this.usuario = usuario;
 	}
 
-	public Long getId() {
+	public Restaurante getId() {
 		return id;
 	}
 
-	public RestauranteModel getRestauranteModel() {
-		return restauranteModel;
+	public Long getRestauranteModel() {
+		return idRestauranteVotado;
 	}
 
-	public Date getDataAtual() {
+	public LocalDate getDataAtual() {
 		return dataAtual;
 	}
 
-	public Usuario getUsuario() {
+	public Long getUsuario() {
 		return usuario;
 	}
 
-	public void setRestauranteModel(RestauranteModel restauranteModel) {
-		this.restauranteModel = restauranteModel;
+	public void setRestauranteModel(Long restauranteModel) {
+		this.idRestauranteVotado = restauranteModel;
 	}
 
-	public void setDataAtual(Date dataAtual) {
+	public void setDataAtual(LocalDate dataAtual) {
 		this.dataAtual = dataAtual;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(Long usuario) {
 		this.usuario = usuario;
 	}
-	
-	
-	
+
+	public int getNumeroVotos() {
+		return numeroVotos;
+	}
+
+	public void setNumeroVotos(int numeroVotos) {
+		this.numeroVotos = numeroVotos;
+	}
 
 }

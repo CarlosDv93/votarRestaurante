@@ -10,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "restaurante")
-public class RestauranteModel implements Serializable {
+public class Restaurante implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -21,11 +21,11 @@ public class RestauranteModel implements Serializable {
 	private String nome;
 	private String tipoComida;
 
-	public RestauranteModel() {
+	public Restaurante() {
 		
 	}
 	
-	public RestauranteModel(String nome, String tipoComida) {
+	public Restaurante(String nome, String tipoComida) {
 		this.nome = nome;
 		this.tipoComida = tipoComida;
 	}

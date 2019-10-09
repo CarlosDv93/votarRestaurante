@@ -18,10 +18,10 @@ public class VotoRestaurante implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Restaurante id;
+	private Long id;
 
 	private Long idRestauranteVotado;
-	private int numeroVotos;
+	
 	private LocalDate dataAtual;
 
 	private Long usuario;
@@ -37,7 +37,7 @@ public class VotoRestaurante implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public Restaurante getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -64,13 +64,4 @@ public class VotoRestaurante implements Serializable {
 	public void setUsuario(Long usuario) {
 		this.usuario = usuario;
 	}
-
-	public int getNumeroVotos() {
-		return numeroVotos;
-	}
-
-	public void setNumeroVotos(int numeroVotos) {
-		this.numeroVotos = numeroVotos;
-	}
-
 }

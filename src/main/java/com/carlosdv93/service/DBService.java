@@ -46,10 +46,10 @@ private static final Logger log = LoggerFactory.getLogger(VotacaoRestauranteAppl
 		VotoRestaurante voto1 = new VotoRestaurante(Long.valueOf(1L), LocalDate.now(), Long.valueOf(1L));
 		votoRP.save(voto1);
 		
-		VotoRestaurante voto2 = new VotoRestaurante(Long.valueOf(11L), LocalDate.now(), Long.valueOf(2L));
+		VotoRestaurante voto2 = new VotoRestaurante(Long.valueOf(2L), LocalDate.now(), Long.valueOf(2L));
 		votoRP.save(voto2);
 		
-		VotoRestaurante voto3 = new VotoRestaurante(Long.valueOf(11L), LocalDate.now(), Long.valueOf(2L));
+		VotoRestaurante voto3 = new VotoRestaurante(Long.valueOf(2L), LocalDate.now(), Long.valueOf(2L));
 		votoRP.save(voto3);
 		
 		log.info("Salvo - Votos");

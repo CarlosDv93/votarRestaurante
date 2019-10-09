@@ -41,7 +41,7 @@ public class VotoController {
 		
 		VotoRestaurante votosUsuario = repository.findByDataAtualAndUsuario(diaAtual, voto.getUsuario());
 		
-		if(votosUsuario != null) {
+		if(votosUsuario == null) {
 			voto.setDataAtual(diaAtual);
 			voto = repository.save(voto);
 			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")

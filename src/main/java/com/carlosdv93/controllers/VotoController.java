@@ -18,39 +18,40 @@ import com.carlosdv93.model.VotoRestaurante;
 import com.carlosdv93.repositories.VotoRepository;
 
 @RestController
-@RequestMapping(value="api/voto")
+@RequestMapping(value = "api/voto")
 public class VotoController {
 
 	@Autowired
 	private VotoRepository repository;
-	
-	@GetMapping(path="")
-	public Iterable<VotoRestaurante> getAll(){
+
+	@GetMapping(path = "")
+	public Iterable<VotoRestaurante> getAll() {
 		return repository.findAll();
 	}
-	
-	@GetMapping(path="/hoje")
-	public Iterable<?> getVotosHoje(){
-		return repository.findByDataAtualAndCount(LocalDate.now());
+
+	@GetMapping(path = "/hoje")
+	public Iterable<?> getVotosHoje() {
+		Iterable<?> votos = repository.findByDataVotoAndCount(LocalDate.now());
+		return votos;
+		
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<?> insertVoto(@Valid @RequestBody VotoRestaurante voto){
-		
+	public ResponseEntity<?> insertVoto(@Valid @RequestBody VotoRestaurante voto) {
+
 		LocalDate diaAtual = LocalDate.now();
-		
-		VotoRestaurante votosUsuario = repository.findByDataAtualAndUsuario(diaAtual, voto.getUsuario());
-		
-		if(votosUsuario == null) {
+
+		VotoRestaurante votoUsuario = repository.findByDataVotoAndUsuario(diaAtual, voto.getUsuario());
+
+		if (votoUsuario == null) {
 			voto.setDataAtual(diaAtual);
 			voto = repository.save(voto);
-			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-					.buildAndExpand(voto).toUri();
+			URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(voto).toUri();
 			return ResponseEntity.status(201).body(voto);
 		} else {
-			return ResponseEntity.status(404).body("Usuário já votou hoje!");
+			return ResponseEntity.status(208).body("Usuário já votou hoje!");
 		}
-		
+
 	}
-	
+
 }

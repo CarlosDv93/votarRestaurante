@@ -16,42 +16,43 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.carlosdv93.model.Restaurante;
-import com.carlosdv93.repositories.RestauranteRepository;
+import com.carlosdv93.model.Usuario;
+import com.carlosdv93.model.Usuario;
+import com.carlosdv93.repositories.UsuarioRepository;
 
 
 @RestController
-@RequestMapping(value="api/restaurante")
-public class RestauranteController {
+@RequestMapping(value="api/usuario")
+public class UsuarioController {
 
 	@Autowired
-	private RestauranteRepository repository;
+	private UsuarioRepository repository;
 	
 	@GetMapping(path="")
-	public Iterable<Restaurante> getAll(){
+	public Iterable<Usuario> getAll(){
 		return repository.findAll();
 	}
 	
 	@PostMapping
-	public ResponseEntity<Restaurante> insert(@Valid @RequestBody Restaurante restaurante){
-		restaurante = repository.save(restaurante);
+	public ResponseEntity<Usuario> insert(@Valid @RequestBody Usuario usuario){
+		usuario = repository.save(usuario);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(restaurante).toUri();
-		return ResponseEntity.status(201).body(restaurante);
+				.buildAndExpand(usuario).toUri();
+		return ResponseEntity.status(201).body(usuario);
 	}
 	
 	@SuppressWarnings("unchecked")
 	@RequestMapping(path="/{id}", method=RequestMethod.PUT)
-	public ResponseEntity<Restaurante> atualizarPessoa(@PathVariable Long id, @RequestBody Restaurante restaurante){
-		Optional<Restaurante> restaurante1 = repository.findById(id);
-		if(restaurante1 != null) {
-			Restaurante restaurante2 = restaurante1.get();
-			restaurante2.setNome(restaurante1.get().getNome());
-			restaurante2.setTipoComida(restaurante1.get().getTipoComida());
-			repository.save(restaurante2);
-			return ResponseEntity.ok(restaurante2);
+	public ResponseEntity<Usuario> atualizarPessoa(@PathVariable Long id, @RequestBody Usuario usuario){
+		Optional<Usuario> usuario1 = repository.findById(id);
+		if(usuario1 != null) {
+			Usuario usuario2 = usuario1.get();
+			usuario2.setUsername(usuario1.get().getUsername());
+			usuario2.setPassword(usuario1.get().getPassword());
+			repository.save(usuario2);
+			return ResponseEntity.ok(usuario2);
 		} else {
-			return (ResponseEntity<Restaurante>) ResponseEntity.badRequest();
+			return (ResponseEntity<Usuario>) ResponseEntity.badRequest();
 		}
 	}
 	

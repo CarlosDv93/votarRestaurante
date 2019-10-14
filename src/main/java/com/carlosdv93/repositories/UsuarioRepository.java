@@ -7,5 +7,7 @@ import com.carlosdv93.model.Usuario;
 
 @Repository
 public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
+	
+	Usuario findByUsername(String username);
 
 }

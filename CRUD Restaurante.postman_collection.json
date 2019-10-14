@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "04973be1-0e05-4b43-a06c-bdbd56e3147b",
+		"name": "CRUD Restaurante",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Criar Restaurante",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nome\": \"Restaurante 2\",\n\t\"tipoComida\": \"Brasileira\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/restaurante"
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Restaurante",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/restaurante"
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Votos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"nome\": \"Restaurante 2\",\n\t\"tipoComida\": \"Brasileira\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/voto"
+			},
+			"response": []
+		},
+		{
+			"name": "Votar",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"usuario\": {\r\n\t\t    \"id\": 14\r\n\t\t},\r\n        \"restaurante\": {\r\n\t        \"id\": 1\r\n\t     }\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/voto"
+			},
+			"response": []
+		},
+		{
+			"name": "Resultado Votação",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/voto/hoje"
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Usuarios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "localhost:8080/api/usuario"
+			},
+			"response": []
+		},
+		{
+			"name": "Criar Usuarios",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n        \"username\": \"Teste1\",\r\n        \"password\": \"123456\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "localhost:8080/api/usuario"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

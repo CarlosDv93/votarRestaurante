@@ -1,7 +1,6 @@
 package com.carlosdv93.service;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.carlosdv93.VotacaoRestauranteApplication;
 import com.carlosdv93.model.Restaurante;
+import com.carlosdv93.model.Usuario;
 import com.carlosdv93.model.VotoRestaurante;
 import com.carlosdv93.repositories.RestauranteRepository;
+import com.carlosdv93.repositories.UsuarioRepository;
 import com.carlosdv93.repositories.VotoRepository;
 
 @Service
@@ -25,6 +26,9 @@ private static final Logger log = LoggerFactory.getLogger(VotacaoRestauranteAppl
 
 	@Autowired
 	private VotoRepository votoRP;
+	
+	@Autowired
+	private UsuarioRepository usuarioRP;
 	
 	@Bean
 	public boolean instatiateDatabase() {
@@ -43,14 +47,27 @@ private static final Logger log = LoggerFactory.getLogger(VotacaoRestauranteAppl
 		
 		log.info("Salvo - Restaurantes");
 		
-		VotoRestaurante voto1 = new VotoRestaurante(Long.valueOf(1L), LocalDate.now(), Long.valueOf(1L));
+		Usuario user1 = new Usuario("Carlos", "123");
+		usuarioRP.save(user1);
+		Usuario user2 = new Usuario("David", "123");
+		usuarioRP.save(user2);
+		Usuario user3 = new Usuario("Admin", "123");
+		usuarioRP.save(user3);
+		Usuario user4 = new Usuario("User", "123");
+		usuarioRP.save(user4);
+		Usuario user5 = new Usuario("teste", "123");
+		usuarioRP.save(user5);
+		
+		log.info("Salvo - Usuarios");
+		
+		VotoRestaurante voto1 = new VotoRestaurante(user1, rest1, LocalDate.now());
 		votoRP.save(voto1);
-		
-		VotoRestaurante voto2 = new VotoRestaurante(Long.valueOf(2L), LocalDate.now(), Long.valueOf(2L));
+		VotoRestaurante voto2 = new VotoRestaurante(user2, rest1, LocalDate.now());
 		votoRP.save(voto2);
-		
-		VotoRestaurante voto3 = new VotoRestaurante(Long.valueOf(2L), LocalDate.now(), Long.valueOf(2L));
+		VotoRestaurante voto3 = new VotoRestaurante(user3, rest2, LocalDate.now());
 		votoRP.save(voto3);
+		VotoRestaurante voto4 = new VotoRestaurante(user4, rest4, LocalDate.now());
+		votoRP.save(voto4);
 		
 		log.info("Salvo - Votos");
 		

@@ -1,12 +1,17 @@
 package com.carlosdv93.model;
 
 import java.io.Serializable;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "restaurante")
@@ -20,6 +25,10 @@ public class Restaurante implements Serializable {
 	
 	private String nome;
 	private String tipoComida;
+	
+	@OneToMany(mappedBy = "restaurante", fetch = FetchType.LAZY)
+	@JsonIgnore
+	Set<VotoRestaurante> votos;
 
 	public Restaurante() {
 		
@@ -48,6 +57,14 @@ public class Restaurante implements Serializable {
 
 	public void setTipoComida(String tipoComida) {
 		this.tipoComida = tipoComida;
+	}
+
+	public Set<VotoRestaurante> getVotos() {
+		return votos;
+	}
+
+	public void setVotos(Set<VotoRestaurante> votos) {
+		this.votos = votos;
 	}
 
 }

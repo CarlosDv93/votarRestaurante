@@ -2,12 +2,14 @@ package com.carlosdv93.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -20,48 +22,53 @@ public class VotoRestaurante implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 
-	private Long idRestauranteVotado;
+	@ManyToOne
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;
 	
-	private LocalDate dataAtual;
-
-	private Long usuario;
+	@ManyToOne
+	@JoinColumn(name = "restaurante_id")
+	private Restaurante restaurante;
+	
+	private LocalDate dataVoto;
 
 	public VotoRestaurante() {
 
 	}
-
-	//TODO: Mantendo inicialmente o valor do ID, posteriormente fazer o vínculo.
-	public VotoRestaurante(Long restauranteModel, LocalDate localDate, Long usuario) {
-		this.idRestauranteVotado = restauranteModel;
-		this.dataAtual = localDate;
+	
+	public VotoRestaurante(Usuario usuario, Restaurante restaurante, LocalDate dataAtual) {
+		super();
 		this.usuario = usuario;
-	}
+		this.restaurante = restaurante;
+		this.dataVoto = dataAtual;
+	}	
 
 	public Long getId() {
 		return id;
 	}
 
-	public Long getRestauranteModel() {
-		return idRestauranteVotado;
-	}
-
-	public LocalDate getDataAtual() {
-		return dataAtual;
-	}
-
-	public Long getUsuario() {
+	public Usuario getUsuario() {
 		return usuario;
 	}
 
-	public void setRestauranteModel(Long restauranteModel) {
-		this.idRestauranteVotado = restauranteModel;
+	public Restaurante getRestaurante() {
+		return restaurante;
+	}
+
+	public LocalDate getDataAtual() {
+		return dataVoto;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public void setRestaurante(Restaurante restaurante) {
+		this.restaurante = restaurante;
 	}
 
 	public void setDataAtual(LocalDate dataAtual) {
-		this.dataAtual = dataAtual;
+		this.dataVoto = dataAtual;
 	}
 
-	public void setUsuario(Long usuario) {
-		this.usuario = usuario;
-	}
 }
